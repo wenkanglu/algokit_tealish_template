@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "algokit-tealish-template"
+version = "0.1.0"
+description = "A template for creating Tealish smart contracts for Algokit."
+authors = ["Gary <wklu99@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "content"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ruff = "^0.0.278"
+black = "^23.7.0"
+py-algorand-sdk = "^2.3.0"
+tealish = "^0.0.2"
+pytest = "^7.4.0"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
