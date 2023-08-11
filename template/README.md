@@ -25,4 +25,9 @@ Here is an explanation of the command:
 - `--bootstrap` tells AlgoKit to install project dependencies after the template is set up.
 - `--answer` template hello_world selects the 'hello_world' sub-template to be used for the project.
 
-After installation, you can open up the project in your code editor and ensure that you are in the created virtual environment (`poetry shell` if you aren't). Then simply run `pytest` in your terminal to run the test.
+Next, you can do the following to get the test running:
+
+- Ensure that the `algokit_sandbox` container is running. If not, run `algokit localnet start` in your terminal.
+- Open up the generated project from above in your editor and run `poetry shell` to enter the virtual environment created for you.
+- Run `tealish compile contracts` to compile the tealish files in the contracts folder into TEAL.
+- Run `pytest` to run `test_hello_world.py` - if the test passes then everything is good!
