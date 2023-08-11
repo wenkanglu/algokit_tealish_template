@@ -1,6 +1,32 @@
-class TestHelloWorld:
-    def setup_method(self):
-        ...
+from base64 import b64decode
 
-    def test_greeting(self):
-        print("Hello, world!")
+from algokit_utils import Account, TransferParameters, transfer
+from algokit_utils.account import get_dispenser_account
+from algosdk.v2client.algod import AlgodClient
+
+from utils.deploy import deploy_app
+
+
+class TestHelloWorld:
+    def test_greeting(self, algod_client: AlgodClient):
+        dispenser = get_dispenser_account(algod_client)
+        manager_account = Account.new_account()
+
+        transfer(
+            algod_client,
+            TransferParameters(
+                from_account=dispenser,
+                to_address=manager_account.address,
+                micro_algos=1_000_000,
+            ),
+        )
+
+        _, _, logs = deploy_app(
+            manager_account, "hello_world.teal", "clear.teal", algod_client
+        )
+
+        hello = b64decode(logs.pop()).decode("utf-8")
+
+        assert hello == "Hello, world!"
+
+        print(hello)
